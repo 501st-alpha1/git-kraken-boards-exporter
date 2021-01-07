@@ -16,3 +16,16 @@ board_fields = ['archived_columns', 'archived_date', 'columns', 'created_by',
 boards = globoard.get_boards(board_fields)
 with open('boards.json', 'w') as file:
   file.write(jsonpickle.encode(boards, unpicklable=False))
+
+card_fields = ['archived_date', 'assignees', 'attachment_count', 'board_id',
+               'column_id', 'comment_count', 'completed_task_count',
+               'created_by', 'created_date', 'due_date', 'description',
+               'labels', 'name', 'total_task_count', 'updated_date',
+               'milestone', 'is_divider']
+for board in boards:
+  # TODO: get archived cards
+  # TODO: handle more than one page (default page of 50 cards)
+  cards = globoard.get_cards(board.id, card_fields)
+  filename = 'cards_for_board_' + board.id + '.json'
+  with open(filename, 'w') as file:
+    file.write(jsonpickle.encode(cards, unpicklable=False))
