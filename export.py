@@ -8,6 +8,9 @@ token = os.environ['GIT_KRAKEN_PERSONAL_TOKEN']
 
 globoard = GloBoard(token)
 
-boards = globoard.get_boards()
+board_fields = ['archived_columns', 'archived_date', 'columns', 'created_by',
+                'created_date', 'invited_members', 'labels', 'members', 'name',
+                'milestones']
+boards = globoard.get_boards(board_fields)
 with open('boards.json', 'w') as file:
   file.write(jsonpickle.encode(boards, unpicklable=False))
