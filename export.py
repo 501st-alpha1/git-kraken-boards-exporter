@@ -8,6 +8,8 @@ token = os.environ['GIT_KRAKEN_PERSONAL_TOKEN']
 
 globoard = GloBoard(token)
 
+# TODO: get archived boards
+# TODO: handle more than one page (default page of 50 boards)
 board_fields = ['archived_columns', 'archived_date', 'columns', 'created_by',
                 'created_date', 'invited_members', 'labels', 'members', 'name',
                 'milestones']
