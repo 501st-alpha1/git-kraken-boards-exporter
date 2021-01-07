@@ -35,6 +35,10 @@ for board in boards:
     file.write(jsonpickle.encode(cards, unpicklable=False))
 
   for card in cards:
+    # Skip downloads if no comments.  (Result will be `[]` anyway.)
+    if card.comment_count == 0:
+      continue
+
     # TODO: handle more than one page (default page of 50 comments)
     comments = globoard.get_comments(board.id, card.id, comment_fields)
     filename = 'comments_for_card_' + card.id + '.json'
