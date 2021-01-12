@@ -24,6 +24,12 @@ card_fields = ['archived_date', 'assignees', 'attachment_count', 'board_id',
                'created_by', 'created_date', 'due_date', 'description',
                'labels', 'name', 'total_task_count', 'updated_date',
                'milestone', 'is_divider']
+single_card_fields = [
+  'archived_date', 'assignees', 'attachment_count', 'board_id', 'column_id',
+  'comment_count', 'completed_task_count', 'created_by', 'created_date',
+  'due_date', 'description', 'labels', 'name', 'total_task_count',
+  'updated_date', 'milestone', 'reactions', 'reactions.reacted', 'is_divider'
+]
 comment_fields = [
   'board_id', 'card_id', 'created_date', 'created_by', 'updated_by',
   'updated_date', 'text', 'reactions', 'reactions.reacted'
@@ -37,6 +43,13 @@ for board in boards:
     file.write(jsonpickle.encode(cards, unpicklable=False))
 
   for card in cards:
+    # Have to fetch each card individually to get reactions.
+    # (Cards by column has reactions but not milestone.
+    card = globoard.get_card(board.id, card.id, single_card_fields)
+    filename = 'card_' + card.id + '.json'
+    with open(filename, 'w') as file:
+      file.write(jsonpickle.encode(card, unpicklable=False))
+
     # Skip downloads if no comments.  (Result will be `[]` anyway.)
     if card.comment_count == 0:
       continue
