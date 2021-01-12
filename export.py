@@ -10,6 +10,8 @@ globoard = GloBoard(token)
 
 # TODO: get archived boards
 # TODO: handle more than one page (default page of 50 boards)
+# These fields are the same for the `/boards/{board_id}` endpoint, so no need
+# to fetch each one individually.
 board_fields = ['archived_columns', 'archived_date', 'columns', 'created_by',
                 'created_date', 'invited_members', 'labels', 'members', 'name',
                 'milestones']
