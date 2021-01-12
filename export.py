@@ -41,7 +41,7 @@ for board in boards:
 
   for card in cards:
     # Have to fetch each card individually to get reactions.
-    # (Cards by column has reactions but not milestone.
+    # (Cards by column has reactions but not milestone.)
     # TODO: check local updated_at and skip unless newer.
     card = globoard.get_card(board.id, card.id, single_card_fields)
     filename = 'card_' + card.id + '.json'
