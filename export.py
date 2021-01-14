@@ -4,7 +4,13 @@ import os
 import jsonpickle
 from py_glo_boards_api import GloBoard, types
 
-token = os.environ['GIT_KRAKEN_PERSONAL_TOKEN']
+try:
+  token = os.environ['GIT_KRAKEN_PERSONAL_TOKEN']
+except KeyError:
+  print('Error: personal access token not found.')
+  print('Store token in `GIT_KRAKEN_PERSONAL_TOKEN` environment variable ' +
+        'then try again.')
+  exit(1)
 
 globoard = GloBoard(token)
 
